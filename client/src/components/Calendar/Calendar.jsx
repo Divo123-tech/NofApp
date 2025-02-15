@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Modal, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Calendar = () => {
   const [monthIndex, setMonthIndex] = useState(1); // February (0-based index)
   const [selectedDate, setSelectedDate] = useState(null); // Track selected date
+  const [isDayFilled, setIsDayFilled] = useState(false);
+  const [currentDayInfo, setCurrentDayInfo] = useState(null);
   const [open, setOpen] = useState(false);
   const year = new Date().getFullYear();
 
@@ -28,7 +31,29 @@ const Calendar = () => {
     "November",
     "December",
   ];
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/daylogs/1",
+          {
+            date: "2025-02-15", // Body content
+          }
+        );
 
+        console.log("Response:", response.data);
+        setCurrentDayInfo(response.data);
+        setIsDayFilled(true);
+      } catch (error) {
+        setCurrentDayInfo(null);
+        setIsDayFilled(false);
+        console.error(
+          "Error posting daylog:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    })();
+  }, []);
   // Get first day of the month
   const firstDay = new Date(year, monthIndex, 1).getDay();
 
@@ -130,7 +155,8 @@ const Calendar = () => {
                     isFutureDay
                       ? "text-gray-400 cursor-not-allowed"
                       : "hover:bg-gray-200 cursor-pointer"
-                  }`}
+                  }
+                  ${currentDayInfo != null && day == 16 ? "bg-green-300" : ""}`}
                 onClick={() => handleDateClick(day)}
               >
                 {day}
@@ -144,23 +170,54 @@ const Calendar = () => {
             aria-describedby="modal-modal-description"
           >
             <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2183d2] text-[#d2f8bd] p-6 rounded-lg shadow-lg w-2/3">
-              <h2 className="text-3xl mb-2 font-[Kodchasan]">New Day</h2>
-              <p className="text-lg font-[Karla]">No updates tracked yet today!</p>
-              <div className="flex justify-end gap-4 mt-4">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
-                >
-                  Close
-                </button>
-                <Link
-                  to={"/survey"}
-                  onClick={() => setOpen(false)}
-                  className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
-                >
-                  Start Tracking
-                </Link>
-              </div>
+              {isDayFilled ? (
+                <>
+                <h2 className="text-3xl mb-2 font-[Kodchasan]">2025-02-15</h2>
+                  <p className="text-lg font-[Karla]">
+                    Mood: {currentDayInfo.mood}
+                  </p>
+                  <p className="text-lg font-[Karla]">
+                    Energy Level: {currentDayInfo.energy_level} / 5
+                  </p>
+                  <p className="text-lg font-[Karla]">
+                    Streak broken? : {currentDayInfo.streak_broken == 0 ? "NO!" : "yes :("}
+                  </p>
+                  <p className="text-lg font-[Karla]">
+                    Notes: {currentDayInfo.notes}
+                  </p>
+                  <div className="flex justify-end gap-4 mt-4">
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
+                    >
+                      Close
+                    </button>
+                    
+                  </div>{" "}
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl mb-2 font-[Kodchasan]">New Day</h2>
+                  <p className="text-lg font-[Karla]">
+                    No updates tracked yet today!
+                  </p>
+                  <div className="flex justify-end gap-4 mt-4">
+                    <button
+                      onClick={() => setOpen(false)}
+                      className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
+                    >
+                      Close
+                    </button>
+                    <Link
+                      to={"/survey"}
+                      onClick={() => setOpen(false)}
+                      className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
+                    >
+                      Start Tracking
+                    </Link>
+                  </div>{" "}
+                </>
+              )}
             </Box>
           </Modal>
         </div>

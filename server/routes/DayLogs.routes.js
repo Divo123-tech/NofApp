@@ -9,10 +9,9 @@ const {
 // router.post("/:id", createDayLog);
 
 // Route to get a day log by user ID and date
-router.get("/:id", getDayLog);
+router.post("/:id", getDayLog);
 
 router.post("", createDayLog);
 
-router.get("", getDayLog);
 
 module.exports = router;

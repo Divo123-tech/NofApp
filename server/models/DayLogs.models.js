@@ -26,12 +26,14 @@ const DayLog = {
         `;
       try {
         const daylog = await dbGet(query, [userId, date]);
+        console.log(await dbAll("SELECT * FROM day_logs"))
         return daylog || null;
       } catch (err) {
         console.error("Error fetching day log:", err);
         throw new Error("Failed to retrieve day log");
       }
     }
+
 };
 
 module.exports = DayLog;

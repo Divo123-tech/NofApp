@@ -1,15 +1,46 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 const Survey = () => {
   const [selectedYesNo, setSelectedYesNo] = useState(null); // Track Yes/No selection
   const [selected, setSelected] = useState(null); // Track urges selection
   const [text, setText] = useState(""); // Track user input
-
+  const navigate = useNavigate()
   const options = ["1", "2", "3", "4", "5"]; // Numbered options for urges
 
   // Function to count words (max 100 words)
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
   const isLimitReached = wordCount > 100;
+
+
+
+  const uploadDaylog = async() => {
+    try {
+      const requestBody = {
+        user_id: 1,  // Replace with actual user_id
+        streak_broken: false, // Example value, change as needed
+        mood: "good", // Example value
+        energyLevel: 4, // Example value
+        notes: "Had a productive day!", // Example value
+      };
+  
+      const response = await axios.post(
+        "http://localhost:3000/api/daylogs",
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      console.log("Daylog uploaded:", response.data);
+      navigate("/tracker")
+    } catch (error) {
+      console.error("Error uploading daylog:", error.response?.data || error.message);
+    }
+  }
 
   return (
     <div className="bg-[#d2f8bd] px-16 py-8">
@@ -87,11 +118,11 @@ const Survey = () => {
       </div>
 
       {/* Save Button (Centered) */}
-      <div className="w-full flex justify-center mt-6">
-        <button className="w-36 bg-[#2183d2] text-white font-semibold py-2 px-6 rounded-full">
+      <div className="w-full flex justify-center mt-6 cursor-pointer">
+        <button className="w-36 bg-[#2183d2] text-white font-semibold py-2 px-6 rounded-full cursor-pointer" onClick={uploadDaylog}>
           Save
         </button>
-      </div>
+      </div >
     </div>
   );
 };
