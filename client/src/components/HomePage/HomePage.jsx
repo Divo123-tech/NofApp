@@ -5,8 +5,8 @@ const HomePage = () => {
   return (
       <div className="flex flex-col justify-center gap-8 items-center h-full relative">
         <div className='flex flex-col gap-4 font-semibold italic font-[Karla]'>
-          <h1 className="text-7xl mr-20 text-[#2183d2]">NOF</h1>
-          <h1 className="text-7xl ml-20 text-[#2183d2]">APP</h1>
+          <h1 className="text-7xl mr-20 text-[#2183d2]">Nof</h1>
+          <h1 className="text-7xl ml-20 text-[#2183d2]">App</h1>
         </div>
         <div className='flex gap-12 font-[Kodchasan]'>
           <Link to="/register">
