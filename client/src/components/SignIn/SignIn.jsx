@@ -4,8 +4,8 @@ import {Link} from "react-router-dom"
 const SignIn = () => {
   return (
     <div className='px-16 py-12'>
-      <h1 className='text-3xl text-[#2183d2] font-bold mb-16'>Sign in</h1>
-      <div className='flex flex-col gap-8'>
+      <h1 className='text-3xl text-[#2183d2] font-bold mb-16 font-[Kodchasan]'>Sign in</h1>
+      <div className='flex flex-col gap-8 font-[Kodchasan]'>
         <div className='flex flex-col gap-4'>
             <h1 className='text-lg text-[#2183d2] font-semibold'>Email</h1>
             <input className='border-b border-[#2183d2] focus:outline-none w-full py-1'></input>
