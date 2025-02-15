@@ -18,6 +18,19 @@ const DayLog = {
         console.error("Error creating day log:", err);
         throw new Error("Failed to create day log");
       }
+    },
+
+    async getDaylog(userId, date) {
+      const query = `
+            SELECT * FROM day_logs WHERE user_id = ? AND date = ?
+        `;
+      try {
+        const daylog = await dbGet(query, [userId, date]);
+        return daylog || null;
+      } catch (err) {
+        console.error("Error fetching day log:", err);
+        throw new Error("Failed to retrieve day log");
+      }
     }
 };
 
