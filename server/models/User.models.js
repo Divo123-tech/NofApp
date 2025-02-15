@@ -47,7 +47,11 @@ const User = {
     for (const key in fields) {
       // if (fields.hasOwnProperty(key)) {
       setClauses.push(`${key} = ?`);
+      console.log("key", key)
+      console.log("fields", fields)
+      console.log(fields['current_streak'])
       params.push(fields[key]);
+
       // }
     }
     // print(setClauses);
@@ -58,7 +62,6 @@ const User = {
 
     // Build the SQL query string with dynamic SET clauses
     const query = `UPDATE users SET ${setClauses.join(", ")} WHERE id = ?`;
-    console.log(query);
     try {
       // Execute the query
       const result = await dbRun(query, params);

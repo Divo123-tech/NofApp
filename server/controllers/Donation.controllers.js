@@ -1,5 +1,5 @@
 const Donation = require("../models/Donations.models");
-
+const User = require("../models/User.models")
 exports.getDonation = async (req, res) => {
   try {
     const donation = await Donation.getDonationById(req.params.id);
@@ -26,6 +26,9 @@ exports.createDonation = async (req, res) => {
 
   try {
     const newDonation = await Donation.createDonation(user_id, charity, amount);
+    const user = await User.getUserById(user_id)
+    const newTotal = user.total_donated + amount
+    User.updateUser(user_id, {"total_donated": newTotal});
     res.status(201).json(newDonation);
   } catch (err) {
     console.log(err);
