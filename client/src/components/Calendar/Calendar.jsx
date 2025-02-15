@@ -61,20 +61,20 @@ const Calendar = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col items-center p-6 border-2 border-[#2183d2] rounded-lg shadow-lg w-[500px]">
+    <div className="flex justify-center items-center w-full mb-6">
+      <div className="flex flex-col items-center p-10 border-2 border-[#2183d2] rounded-2xl shadow-lg w-[400px]">
         {/* Month Header with Arrows */}
-        <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-4 mb-6">
           <FaChevronLeft className="cursor-pointer text-[#2183d2] hover:opacity-80" onClick={handlePrevMonth} />
-          <h2 className="text-2xl font-bold text-[#2183d2]">{months[monthIndex]} {year}</h2>
+          <h2 className="text-3xl font-bold text-[#2183d2]">{months[monthIndex]} {year}</h2>
           <FaChevronRight className="cursor-pointer text-[#2183d2] hover:opacity-80" onClick={handleNextMonth} />
         </div>
 
         {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-3 w-full">
+        <div className="grid grid-cols-7 gap-4 w-full">
           {/* Days of the week */}
           {daysOfWeek.map((day) => (
-            <div key={day} className="text-center font-semibold text-[#2183d2]">
+            <div key={day} className="text-center font-semibold text-[#2183d2] text-lg">
               {day}
             </div>
           ))}
@@ -90,7 +90,7 @@ const Calendar = () => {
             return (
               <div
                 key={index}
-                className={`text-center w-12 h-12 flex items-center justify-center rounded-full text-lg
+                className={`text-center w-14 h-14 flex items-center justify-center rounded-full text-xl
                   ${day === selectedDate ? "bg-[#2183d2] text-white font-bold" : "text-[#2183d2]"}
                   ${isFutureDay ? "text-gray-400 cursor-not-allowed" : "hover:bg-gray-200 cursor-pointer"}`}
                 onClick={() => handleDateClick(day)}
