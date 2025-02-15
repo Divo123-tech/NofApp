@@ -1,18 +1,17 @@
 const DayLogs = require("../models/DayLogs.models");
-const User = require("../models/User.models");
 
 exports.createDayLog = async (req, res) => {
-    try {
-      const { streak_broken, mood, energyLevel, notes } = req.body;
+    const { streak_broken, mood, energyLevel, notes } = req.body;
   
-      if (!streak_broken || !mood || !energyLevel || !notes) {
+    if (!streak_broken || !mood || !energyLevel || !notes) 
         return res.status(400).json({ error: "All fields are required" });
-      }
 
-      if(!streak_broken) {
-        User.updateUser(req.params.id, current_streak);
-        console.log(user)
-      }
+    try {
+    
+    //   if(!streak_broken) {
+    //     User.updateUser(req.params.id, current_streak);
+    //     console.log(user)
+    //   }
   
       const result = await DayLogs.createDaylog(req.params.id, streak_broken, mood, energyLevel, notes);
   
