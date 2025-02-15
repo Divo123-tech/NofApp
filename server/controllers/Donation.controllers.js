@@ -1,5 +1,6 @@
 const Donation = require("../models/Donations.models");
 const User = require("../models/User.models")
+const {pay} = require("./interledger")
 exports.getDonation = async (req, res) => {
   try {
     const donation = await Donation.getDonationById(req.params.id);
@@ -29,7 +30,7 @@ exports.createDonation = async (req, res) => {
     const user = await User.getUserById(user_id)
     const newTotal = user.total_donated + amount
     User.updateUser(user_id, {"total_donated": newTotal});
-    
+    console.log(await pay())
     res.status(201).json(newDonation);
   } catch (err) {
     console.log(err);
