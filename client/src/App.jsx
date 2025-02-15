@@ -7,6 +7,7 @@ import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Charity from "./components/Charity";
 import "./App.css";
+
 function App() {
   const location = useLocation();
   const hideFooter =

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
+import { Modal, Box } from "@mui/material";
 const Calendar = () => {
   const [monthIndex, setMonthIndex] = useState(1); // February (0-based index)
   const [selectedDate, setSelectedDate] = useState(null); // Track selected date
+  const [open, setOpen] = useState(false);
   const year = new Date().getFullYear();
 
   // Get today's date
@@ -11,19 +12,28 @@ const Calendar = () => {
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
   const currentDay = today.getDate();
-
   // Months array
   const months = [
-    "January", "February", "March", "April", "May", "June", 
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
-  
+
   // Get first day of the month
   const firstDay = new Date(year, monthIndex, 1).getDay();
-  
+
   // Get total days in the month (February adjusts for leap years)
   const totalDays = new Date(year, monthIndex + 1, 0).getDate();
-  
+
   // Days of the week
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -46,16 +56,22 @@ const Calendar = () => {
   // Handle date selection
   const handleDateClick = (day) => {
     if (!day) return; // Ignore empty slots
-
     // Block future dates
-    if (year > currentYear || (year === currentYear && monthIndex > currentMonth) || 
-        (year === currentYear && monthIndex === currentMonth && day > currentDay)) {
+    setOpen(true);
+    if (
+      year > currentYear ||
+      (year === currentYear && monthIndex > currentMonth) ||
+      (year === currentYear && monthIndex === currentMonth && day > currentDay)
+    ) {
       return;
     }
 
     // Format the selected date as "YYYY-MM-DD"
-    const formattedDate = `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    
+    const formattedDate = `${year}-${String(monthIndex + 1).padStart(
+      2,
+      "0"
+    )}-${String(day).padStart(2, "0")}`;
+
     setSelectedDate(day);
     console.log(formattedDate); // Log the selected date
   };
@@ -65,16 +81,27 @@ const Calendar = () => {
       <div className="flex flex-col items-center p-8 border-2 border-[#2183d2] rounded-2xl shadow-lg w-[400px]">
         {/* Month Header with Arrows */}
         <div className="flex items-center gap-3 mb-4">
-          <FaChevronLeft className="cursor-pointer text-[#2183d2] hover:opacity-80" onClick={handlePrevMonth} />
-          <h2 className="text-xl font-bold text-[#2183d2]">{months[monthIndex]} {year}</h2>
-          <FaChevronRight className="cursor-pointer text-[#2183d2] hover:opacity-80" onClick={handleNextMonth} />
+          <FaChevronLeft
+            className="cursor-pointer text-[#2183d2] hover:opacity-80"
+            onClick={handlePrevMonth}
+          />
+          <h2 className="text-xl font-bold text-[#2183d2]">
+            {months[monthIndex]} {year}
+          </h2>
+          <FaChevronRight
+            className="cursor-pointer text-[#2183d2] hover:opacity-80"
+            onClick={handleNextMonth}
+          />
         </div>
 
         {/* Calendar Grid */}
         <div className="grid grid-cols-7 gap-2 w-full">
           {/* Days of the week */}
           {daysOfWeek.map((day) => (
-            <div key={day} className="text-center font-semibold text-[#2183d2] text-sm">
+            <div
+              key={day}
+              className="text-center font-semibold text-[#2183d2] text-sm"
+            >
               {day}
             </div>
           ))}
@@ -82,23 +109,58 @@ const Calendar = () => {
           {/* Days of the month */}
           {days.map((day, index) => {
             // Check if the date is in the future (across all months)
-            const isFutureDay = 
-              year > currentYear || 
-              (year === currentYear && monthIndex > currentMonth) || 
-              (year === currentYear && monthIndex === currentMonth && day > currentDay);
+            const isFutureDay =
+              year > currentYear ||
+              (year === currentYear && monthIndex > currentMonth) ||
+              (year === currentYear &&
+                monthIndex === currentMonth &&
+                day > currentDay);
 
             return (
               <div
                 key={index}
                 className={`text-center w-10 h-10 flex items-center justify-center rounded-full text-md
-                  ${day === selectedDate ? "bg-[#2183d2] text-white font-bold" : "text-[#2183d2]"}
-                  ${isFutureDay ? "text-gray-400 cursor-not-allowed" : "hover:bg-gray-200 cursor-pointer"}`}
+                  ${
+                    day === selectedDate
+                      ? "bg-[#2183d2] text-white font-bold"
+                      : "text-[#2183d2]"
+                  }
+                  ${
+                    isFutureDay
+                      ? "text-gray-400 cursor-not-allowed"
+                      : "hover:bg-gray-200 cursor-pointer"
+                  }`}
                 onClick={() => handleDateClick(day)}
               >
                 {day}
               </div>
             );
           })}
+          <Modal
+            open={open}
+            onClose={() => setOpen(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2183d2] text-[#d2f8bd] p-6 rounded-lg shadow-lg w-2/3">
+              <h2 className="text-3xl mb-2 font-[Kodchasan]">New Day</h2>
+              <p className="text-lg font-[Karla]">No updates tracked yet today!</p>
+              <div className="flex justify-end gap-4 mt-4">
+                <button
+                  onClick={() => setOpen(false)}
+                  className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
+                >
+                  Start Tracking
+                </button>
+              </div>
+            </Box>
+          </Modal>
         </div>
       </div>
     </div>
