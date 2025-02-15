@@ -18,6 +18,7 @@ global.db = new sqlite3.Database("./database.db", function (err) {
   }
 });
 const userRoutes = require("./routes/User.routes");
+const donationRoutes = require("./routes/Donation.routes.js");
 // Configure body-parser middleware for parsing URL-encoded bodies
 // Enable CORS for all requests
 app.use(cors());
@@ -42,6 +43,7 @@ app.use(
   })
 );
 app.use("/api/users", userRoutes);
+app.use("/api/donations", donationRoutes);
 // Start Server on Port 3000
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
