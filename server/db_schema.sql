@@ -24,6 +24,7 @@ CREATE TABLE day_logs (
     id INTEGER PRIMARY KEY,
     user_id INTEGER,
     date DATE DEFAULT (CURRENT_DATE),
+    streak_broken BOOLEAN DEFAULT FALSE,
     mood TEXT CHECK(mood IN ('great', 'good', 'neutral', 'bad', 'terrible')),
     energy_level INTEGER CHECK(energy_level BETWEEN 1 AND 5),
     notes TEXT CHECK(length(notes) <= 100),
