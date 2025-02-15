@@ -13,7 +13,7 @@ const Footer = () => {
             <img src={CharityImg} className="w-8 h-8"></img>
             <h1 className="text-[#d2f8bd] text-xs">Charity</h1>
         </Link>
-        <Link to="/acc-partner" className="flex flex-col items-center cursor-pointer">
+        <Link to="/partner" className="flex flex-col items-center cursor-pointer">
             <img src={PartnerImg} className="w-8 h-8"></img>
             <h1 className="text-[#d2f8bd] text-xs">Partner</h1>
         </Link>
