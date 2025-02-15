@@ -1,9 +1,12 @@
 import HomePage from "./components/HomePage";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
+import Tracker from "./components/Tracker";
 import Footer from "./components/Footer";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
+import Tracker from './components/Tracker';
+import './App.css'
 function App() {
   const location = useLocation();
   const hideFooter =
@@ -17,11 +20,13 @@ function App() {
           <Route path={"/"} element={<HomePage />} />
           <Route path={"/sign-in"} element={<SignIn />} />
           <Route path={"/register"} element={<Register />} />
+          <Route path={"/tracker"} element={<Tracker />} />
         </Routes>
+      {!hideFooter && <Footer />}
+      </div>
       </div>
 
-      {!hideFooter && <Footer />}
-    </div>
+
   );
 }
 
