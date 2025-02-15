@@ -30,8 +30,8 @@ exports.createDonation = async (req, res) => {
     const user = await User.getUserById(user_id)
     const newTotal = user.total_donated + amount
     User.updateUser(user_id, {"total_donated": newTotal});
-    console.log(await pay())
-    res.status(201).json(newDonation);
+    const redirectUri = await pay()
+    res.status(201).json({redirectUri: redirectUri});
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });

@@ -13,10 +13,12 @@ const Donations = () => {
       return;
     }
 
-    await axios.post("http://localhost:3000/api/donations", {user_id: 1, amount: 20, "charity": decodeURIComponent(charityName)})
-    navigate("/charities")
+    const response = await axios.post("http://localhost:3000/api/donations", {user_id: 1, amount: 20, "charity": decodeURIComponent(charityName)})
+    console.log(response.data.redirectUri)
+    window.location.href = response.data.redirectUri
+    // navigate("/charities")
     // Execute logic from index.js (or any other JavaScript file)
-    console.log(`Donating $${amount} to ${decodeURIComponent(charityName)}`);
+    console.log(`Donating $${amount} to ${charityName}`);
   };
 
   return (
