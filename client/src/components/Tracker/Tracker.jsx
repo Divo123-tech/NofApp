@@ -6,7 +6,9 @@ import Calendar from "../Calendar/Calendar"; // Import Calendar component
 const Tracker = () => {
   return (
     <div className="min-h-screen bg-[#d2f8bd] flex flex-col items-center justify-start px-6 py-8">
-      <h1 className="text-2xl md:text-3xl text-[#2183d2] font-bold mb-4">Tracker</h1>
+      <div className="w-full text-left ml-10">
+        <h1 className="text-md md:text-3xl text-[#2183d2] mb-3">Calendar</h1>
+      </div>
 
       {/* Calendar Component (Ensure No Extra Spacing) */}
       <div className="w-full">
