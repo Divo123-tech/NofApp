@@ -5,6 +5,7 @@ import Tracker from "./components/Tracker";
 import Footer from "./components/Footer";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
+import Charity from "./components/Charity"
 import './App.css'
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
           <Route path={"/sign-in"} element={<SignIn />} />
           <Route path={"/register"} element={<Register />} />
           <Route path={"/tracker"} element={<Tracker />} />
+          <Route path={"/charities"} element={<Charity />} />
         </Routes>
       {!hideFooter && <Footer />}
       </div>
