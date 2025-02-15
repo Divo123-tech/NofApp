@@ -1,4 +1,5 @@
 const DayLogs = require("../models/DayLogs.models");
+const User = require("../models/User.models");
 
 exports.createDayLog = async (req, res) => {
     const { user_id, streak_broken, mood, energyLevel, notes } = req.body;
@@ -9,8 +10,13 @@ exports.createDayLog = async (req, res) => {
     try {
     
       if(!streak_broken) {
-        User.updateUser(req.params.id, current_streak);
-        console.log(user)
+        const user = await User.getUserById(user_id)
+        const newStreak = user.current_streak + 1
+        const newLongestStreak = user.longest_streak + 1
+        const newCoins = user.coins + 1
+        const newTotal = user.total_days_clean + 1
+        User.updateUser(user_id, {"current_streak": newStreak, "coins": newCoins, "longest_streak": newLongestStreak, "total_days_clean": newTotal});
+        // console.log(user)
       }
   
       const result = await DayLogs.createDaylog(user_id, streak_broken, mood, energyLevel, notes);
