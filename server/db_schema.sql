@@ -4,8 +4,6 @@ CREATE TABLE users (
     username TEXT UNIQUE NOT NULL,
     email TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    -- profile_image TEXT,
-    -- date_joined DATETIME DEFAULT CURRENT_TIMESTAMP,
     current_streak INTEGER DEFAULT 0,
     longest_streak INTEGER DEFAULT 0,
     coins INTEGER DEFAULT 0,
@@ -14,16 +12,15 @@ CREATE TABLE users (
     type TEXT CHECK(type IN ('seeking_help', 'helping', 'both')),
     accountability_partner_id INTEGER,
     FOREIGN KEY (accountability_partner_id) REFERENCES users(id) ON DELETE SET NULL
-    -- notifications_enabled INTEGER DEFAULT 1,  -- Use 1 for TRUE, 0 for FALSE
-    -- privacy_level TEXT CHECK(privacy_level IN ('public', 'private', 'friends-only')) DEFAULT 'public'
 );
+
 
 
 -- Mood logs
 CREATE TABLE day_logs (
     id INTEGER PRIMARY KEY,
     user_id INTEGER,
-    date DATE DEFAULT (CURRENT_DATE),
+    date TEXT DEFAULT (DATE('now')),
     streak_broken BOOLEAN DEFAULT FALSE,
     mood TEXT CHECK(mood IN ('great', 'good', 'neutral', 'bad', 'terrible')),
     energy_level INTEGER CHECK(energy_level BETWEEN 1 AND 5),
@@ -38,7 +35,7 @@ CREATE TABLE donations (
     user_id INTEGER,
     charity TEXT NOT NULL,
     amount INTEGER NOT NULL,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date TEXT DEFAULT (DATE('now')),
     -- transaction_id TEXT UNIQUE,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );

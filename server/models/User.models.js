@@ -28,10 +28,10 @@ const User = {
   async createUser(username, email, password_hash) {
     try {
       const result = await dbRun(
-        "INSERT INTO users (username, email,password_hash) VALUES (?, ?, ?)",
+        "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)",
         [username, email, password_hash]
       );
-      return { id: result.lastID, username, email, password_hash }; // SQLite does not return inserted row automatically
+      return { username, email, password_hash }; // SQLite does not return inserted row automatically
     } catch (err) {
       throw new Error(err.message);
     }
