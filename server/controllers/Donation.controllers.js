@@ -29,6 +29,7 @@ exports.createDonation = async (req, res) => {
     const user = await User.getUserById(user_id)
     const newTotal = user.total_donated + amount
     User.updateUser(user_id, {"total_donated": newTotal});
+    
     res.status(201).json(newDonation);
   } catch (err) {
     console.log(err);

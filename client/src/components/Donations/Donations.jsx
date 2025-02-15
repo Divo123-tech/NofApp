@@ -1,16 +1,20 @@
 import { useParams } from 'react-router-dom';
-
+import axios from 'axios';
+import Charity from '../Charity';
+import { useNavigate } from 'react-router-dom';
 const Donations = () => {
   const { charityName } = useParams(); // Extract the charityName from the URL
-
+  const navigate = useNavigate()
   // Function to handle the donation process
-  const handleDonate = () => {
+  const handleDonate = async() => {
     const amount = document.getElementById('donationAmount').value;
     if (!amount || isNaN(amount) || amount <= 0) {
       alert('Please enter a valid donation amount.');
       return;
     }
 
+    await axios.post("http://localhost:3000/api/donations", {user_id: 1, amount: 20, "charity": decodeURIComponent(charityName)})
+    navigate("/charities")
     // Execute logic from index.js (or any other JavaScript file)
     console.log(`Donating $${amount} to ${decodeURIComponent(charityName)}`);
   };
