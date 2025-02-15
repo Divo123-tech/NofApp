@@ -61,20 +61,20 @@ const Calendar = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full mb-6">
-      <div className="flex flex-col items-center p-10 border-2 border-[#2183d2] rounded-2xl shadow-lg w-[400px]">
+    <div className="flex justify-center items-center w-full mb-4">
+      <div className="flex flex-col items-center p-8 border-2 border-[#2183d2] rounded-2xl shadow-lg w-[400px]">
         {/* Month Header with Arrows */}
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-3 mb-4">
           <FaChevronLeft className="cursor-pointer text-[#2183d2] hover:opacity-80" onClick={handlePrevMonth} />
-          <h2 className="text-3xl font-bold text-[#2183d2]">{months[monthIndex]} {year}</h2>
+          <h2 className="text-xl font-bold text-[#2183d2]">{months[monthIndex]} {year}</h2>
           <FaChevronRight className="cursor-pointer text-[#2183d2] hover:opacity-80" onClick={handleNextMonth} />
         </div>
 
         {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-4 w-full">
+        <div className="grid grid-cols-7 gap-2 w-full">
           {/* Days of the week */}
           {daysOfWeek.map((day) => (
-            <div key={day} className="text-center font-semibold text-[#2183d2] text-lg">
+            <div key={day} className="text-center font-semibold text-[#2183d2] text-sm">
               {day}
             </div>
           ))}
@@ -90,7 +90,7 @@ const Calendar = () => {
             return (
               <div
                 key={index}
-                className={`text-center w-14 h-14 flex items-center justify-center rounded-full text-xl
+                className={`text-center w-10 h-10 flex items-center justify-center rounded-full text-md
                   ${day === selectedDate ? "bg-[#2183d2] text-white font-bold" : "text-[#2183d2]"}
                   ${isFutureDay ? "text-gray-400 cursor-not-allowed" : "hover:bg-gray-200 cursor-pointer"}`}
                 onClick={() => handleDateClick(day)}
