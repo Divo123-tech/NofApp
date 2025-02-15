@@ -6,7 +6,7 @@ yarn-error.log*
 
 # Environment variables
 .env
-
+database.db
 *.sqlite3
 *.db-journal
 
