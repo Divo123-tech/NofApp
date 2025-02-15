@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Modal, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 const Calendar = () => {
   const [monthIndex, setMonthIndex] = useState(1); // February (0-based index)
   const [selectedDate, setSelectedDate] = useState(null); // Track selected date
@@ -152,12 +153,13 @@ const Calendar = () => {
                 >
                   Close
                 </button>
-                <button
+                <Link
+                  to={"/survey"}
                   onClick={() => setOpen(false)}
                   className="bg-[#d2f8bd] text-[#2183d2] px-4 py-2 rounded-md cursor-pointer"
                 >
                   Start Tracking
-                </button>
+                </Link>
               </div>
             </Box>
           </Modal>
