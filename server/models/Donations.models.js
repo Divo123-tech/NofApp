@@ -34,7 +34,6 @@ const Donation = {
       
       // Return the newly created donation
       return {
-        id: result.lastID,
         user_id,
         charity,
         amount,
