@@ -28,7 +28,7 @@ const User = {
   async createUser(username, email, password_hash) {
     try {
       const result = await dbRun(
-        "INSERT INTO users (username, email,) VALUES (?, ?, ?)",
+        "INSERT INTO users (username, email,password_hash) VALUES (?, ?, ?)",
         [username, email, password_hash]
       );
       return { id: result.lastID, username, email, password_hash }; // SQLite does not return inserted row automatically

@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import HomePage from './components/HomePage'
 import './App.css'
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes, useLocation} from "react-router-dom";
 function App() {
-
+  const location = useLocation();
   return (
-    <>
- 
-    </>
+    <div className="bg-[#d2f8bd] h-screen">
+      <Routes location={location}>
+        <Route path={"/"} element={<HomePage />} />
+      </Routes>
+    </div>
   )
 }
 
