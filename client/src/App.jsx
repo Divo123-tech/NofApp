@@ -2,7 +2,6 @@ import HomePage from "./components/HomePage";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
 import Tracker from "./components/Tracker";
-import Partner from "./components/Partner";
 import Footer from "./components/Footer";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -17,8 +16,8 @@ function App() {
   return (
     <div className="flex flex-col h-screen bg-[#d2f8bd]">
       {/* Top Section (Like a "Top Footer") */}
-      {!hideFooter && <div className="h-20 flex flex-col items-center font-semibold italic font-[Karla] py-4">
-        <h1 className="text-2xl mr-8 text-[#2183d2]">NoF</h1>
+      {!hideFooter && <div className="h-20 flex flex-col items-center font-bold italic font-[Karla] py-4">
+        <h1 className="text-2xl mr-8 text-[#2183d2]">Nof</h1>
         <h1 className="text-2xl ml-8 text-[#2183d2]">App</h1>
       </div>}
 
@@ -30,7 +29,6 @@ function App() {
           <Route path={"/register"} element={<Register />} />
           <Route path={"/tracker"} element={<Tracker />} />
           <Route path={"/charities"} element={<Charity />} />
-          <Route path={"/partner"} element={<Partner />} />
         </Routes>
       </div>
 
