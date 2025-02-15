@@ -5,7 +5,6 @@ import Tracker from "./components/Tracker";
 import Footer from "./components/Footer";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Tracker from './components/Tracker';
 import './App.css'
 function App() {
   const location = useLocation();
