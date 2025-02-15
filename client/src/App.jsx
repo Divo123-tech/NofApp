@@ -1,4 +1,5 @@
 import HomePage from './components/HomePage'
+import SignIn from './components/SignIn';
 import './App.css'
 import { Route, Routes, useLocation} from "react-router-dom";
 function App() {
@@ -6,7 +7,9 @@ function App() {
   return (
     <div className="bg-[#d2f8bd] h-screen">
       <Routes location={location}>
-        <Route path={"/"} element={<HomePage />} />
+      <Route path={"/"} element={<HomePage />} />
+      <Route path={"/sign-in"} element={<SignIn />} />
+        
       </Routes>
     </div>
   )
