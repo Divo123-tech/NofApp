@@ -7,18 +7,18 @@ const dbRun = promisify(global.db.run).bind(global.db);
 
 const DayLog = {
     async createDaylog(userId, streak_broken, mood, energyLevel, notes) {
-        const query = `
+      const query = `
             INSERT INTO day_logs (user_id, streak_broken, mood, energy_level, notes)
             VALUES (?, ?, ?, ?, ?)
         `;
-        try {
-            await dbRun(query, [userId, streak_broken, mood, energyLevel, notes]);
-            return { success: true };
-        } catch (err) {
-            console.error("Error creating day log:", err);
-            throw new Error("Failed to create day log");
-        }
-    };
+      try {
+        await dbRun(query, [userId, streak_broken, mood, energyLevel, notes]);
+        return { success: true };
+      } catch (err) {
+        console.error("Error creating day log:", err);
+        throw new Error("Failed to create day log");
+      }
+    }
 };
 
 module.exports = DayLog;
