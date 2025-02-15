@@ -11,7 +11,7 @@ function App() {
     location.pathname == "/register" ||
     location.pathname == "/sign-in";
   return (
-    <div className="flex flex-col min-h-screen bg-[#d2f8bd]">
+    <div className="flex flex-col h-screen bg-[#d2f8bd]">
       <div className="flex-grow">
         <Routes location={location}>
           <Route path={"/"} element={<HomePage />} />

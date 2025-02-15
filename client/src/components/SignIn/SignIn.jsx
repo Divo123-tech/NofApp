@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaArrowRight } from "react-icons/fa6";
+import {Link} from "react-router-dom"
 const SignIn = () => {
   return (
     <div className='px-16 py-12'>
@@ -14,9 +15,9 @@ const SignIn = () => {
             <input className='border-b border-[#2183d2] focus:outline-none w-full py-1'></input>
         </div>
       </div>
-      <div className='mt-8 flex flex-col items-end'>
+      <Link to="/tracker" className='mt-8 flex flex-col items-end'>
       <FaArrowRight size={22} color='#2183d2'/>
-      </div>
+      </Link>
     </div>
   )
 }
