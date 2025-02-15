@@ -1,19 +1,19 @@
 const DayLogs = require("../models/DayLogs.models");
 
 exports.createDayLog = async (req, res) => {
-    const { streak_broken, mood, energyLevel, notes } = req.body;
+    const { user_id, streak_broken, mood, energyLevel, notes } = req.body;
   
-    if (!streak_broken || !mood || !energyLevel || !notes) 
-        return res.status(400).json({ error: "All fields are required" });
+    if (!mood || !energyLevel) 
+        return res.status(400).json({ error: "Mood, and Energy level fields are required" });
 
     try {
     
-    //   if(!streak_broken) {
-    //     User.updateUser(req.params.id, current_streak);
-    //     console.log(user)
-    //   }
+      if(!streak_broken) {
+        User.updateUser(req.params.id, current_streak);
+        console.log(user)
+      }
   
-      const result = await DayLogs.createDaylog(req.params.id, streak_broken, mood, energyLevel, notes);
+      const result = await DayLogs.createDaylog(user_id, streak_broken, mood, energyLevel, notes);
   
       res.status(201).json({ message: "Day log created successfully", result });
     } catch (err) {

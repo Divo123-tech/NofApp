@@ -13,4 +13,6 @@ router.get("/:id", getDayLog);
 
 router.post("", createDayLog);
 
+router.get("", getDayLog);
+
 module.exports = router;
