@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Charity from "./components/Charity";
+import Donations from "./components/Donations";
 import "./App.css";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path={"/charities"} element={<Charity />} />
           <Route path={"/partner"} element={<Partner />} />
           <Route path={"/survey"} element={<Survey />} />
+          <Route path={"/donations/:charityName"} element={<Donations />} />
         </Routes>
       </div>
 
