@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const charities = [
   "St Jude's Children Hospital",
   "World Food Relief",
@@ -23,12 +25,13 @@ const Charity = () => {
       </div>
       <div className="flex flex-wrap justify-center gap-8 mt-12 h-[50vh] overflow-y-auto">
         {charities.map((charity) => (
-          <div
+          <Link
+            to={`/donations/${encodeURIComponent(charity)}`}
             key={charity}
             className="rounded-md cursor-pointer border w-2/5 border-[#2183d2] px-4 py-4 text-center flex flex-col items-center justify-center hover:bg-[#2183d2] text-[#2183d2] hover:text-[#d2f8bd]"
           >
             <p className="font-[Kodchasan]">{charity}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
