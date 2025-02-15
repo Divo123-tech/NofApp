@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import axios from 'axios';
-import Charity from '../Charity';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 const Donations = () => {
   const { charityName } = useParams(); // Extract the charityName from the URL
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   // Function to handle the donation process
   const handleDonate = async() => {
+    setLoading(true)
     const amount = document.getElementById('donationAmount').value;
     if (!amount || isNaN(amount) || amount <= 0) {
       alert('Please enter a valid donation amount.');
@@ -45,9 +45,10 @@ const Donations = () => {
         />
         <button
           onClick={handleDonate}
-          className="bg-[#2183d2] text-white px-6 py-2 rounded-md hover:bg-[#1a6ca8] transition-colors"
+          disabled={loading}
+          className="bg-[#2183d2] text-white px-6 py-2 rounded-md hover:bg-[#1a6ca8] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Donate Now
+          {loading ? "Processing..." : "Donate Now"}
         </button>
       </div>
     </div>
